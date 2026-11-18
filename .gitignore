@@ -1,0 +1,14 @@
+node_modules/
+dist/
+shots/
+renders/
+.devTools/
+.devtools/
+.tools/
+.pw-browsers/
+.npm-cache/
+.pages/
+assets/raw/
+assets/*.blend
+tools/
+.DS_Store
