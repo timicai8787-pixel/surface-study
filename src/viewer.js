@@ -119,8 +119,8 @@ export function createViewer(canvas) {
     renderer.setSize(w, h, false)
     camera.aspect = w / h
     const shift = w > 1180 ? 0.14 : w > 860 ? 0.1 : 0
-    const lift = w <= 860 ? 0.065 : 0.028
-    distScale = w <= 860 ? 1.5 : 1
+    const lift = w <= 860 ? 0.105 : 0.028
+    distScale = w <= 860 ? 1.72 : 1
     camera.setViewOffset(w, h, -w * shift, h * lift, w, h)
     camera.updateProjectionMatrix()
   }
