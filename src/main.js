@@ -178,8 +178,9 @@ function setupControls() {
     })
   })
 
-  canvas.addEventListener('pointerdown', () => canvas.classList.add('is-grabbing'))
-  window.addEventListener('pointerup', () => canvas.classList.remove('is-grabbing'))
+  const hit = document.getElementById('stage-hit')
+  hit?.addEventListener('pointerdown', () => hit.classList.add('is-grabbing'))
+  window.addEventListener('pointerup', () => hit?.classList.remove('is-grabbing'))
 }
 
 async function boot() {

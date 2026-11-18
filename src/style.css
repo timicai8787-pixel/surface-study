@@ -219,11 +219,18 @@ body.is-dark .head-gh:hover { color: #d8a07a; }
   width: 100%;
   height: 100%;
   display: block;
+  pointer-events: none;
+}
+#stage-hit {
+  position: absolute;
+  left: 52%;
+  right: 0;
+  top: 9%;
+  bottom: 9%;
   cursor: grab;
   touch-action: none;
-  outline: none;
 }
-#viewer.is-grabbing { cursor: grabbing; }
+#stage-hit.is-grabbing { cursor: grabbing; }
 
 .stage-glow {
   position: absolute;
@@ -858,8 +865,9 @@ body.stage-off .views {
   .hero__lede { max-width: 92%; font-size: 13px; line-height: 1.95; margin-top: 22px; }
   .hero__meta { display: none; }
   .seal { display: none; }
-  .scroll-cue { display: none; }
+  .scroll-cue { display: flex; bottom: 96px; }
   .stage-plate__n, .stage-plate__v { display: none; }
+  #stage-hit { left: 0; right: 0; top: 26%; height: 32%; bottom: auto; }
 
   .observe { min-height: auto; padding: 8vh var(--pad) 10vh; }
   .sheet { width: 100%; }

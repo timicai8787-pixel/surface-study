@@ -71,7 +71,8 @@ export function createViewer(canvas) {
   const camera = new THREE.PerspectiveCamera(34, 1, 0.01, 80)
   camera.position.set(0, 0.1, 2)
 
-  const controls = new OrbitControls(camera, canvas)
+  const hit = document.getElementById('stage-hit') || canvas
+  const controls = new OrbitControls(camera, hit)
   controls.target.set(0, 0.01, 0)
   controls.enableDamping = true
   controls.dampingFactor = 0.075
@@ -328,10 +329,10 @@ export function createViewer(canvas) {
 
   controls.addEventListener('start', () => {
     tween = null
-    canvas.classList.add('is-grabbing')
+    hit.classList.add('is-grabbing')
   })
   controls.addEventListener('end', () => {
-    canvas.classList.remove('is-grabbing')
+    hit.classList.remove('is-grabbing')
   })
 
   window.addEventListener('resize', () => {
