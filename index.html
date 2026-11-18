@@ -13,9 +13,9 @@
   <meta property="og:url" content="https://timicai8787-pixel.github.io/surface-study/" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="preload" as="fetch" href="./models/study-01.glb" crossorigin />
-  <script type="module" crossorigin src="./assets/index-CD0kElbK.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BwU3teEr.css">
+  <link rel="preload" as="image" href="./images/hero-poster-desktop.webp" />
+  <script type="module" crossorigin src="./assets/index-l2C6gLnh.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-d0RHsOQJ.css">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -51,8 +51,16 @@
 
   <div id="stage" aria-label="可旋转的三维扫描模型">
     <div class="stage-glow" aria-hidden="true"></div>
+    <picture id="stage-poster">
+      <source media="(max-width: 860px)" srcset="./images/hero-poster-mobile.webp" width="390" height="844" />
+      <img src="./images/hero-poster-desktop.webp" alt="" width="1440" height="900" />
+    </picture>
     <canvas id="viewer" aria-hidden="true"></canvas>
     <div id="stage-hit" aria-label="三维模型：拖动旋转，滚轮缩放" role="img"></div>
+    <div class="model-status" id="model-status">
+      <span id="model-status-text">3D / 0%</span>
+      <button type="button" id="model-retry" hidden>重试</button>
+    </div>
     <div class="stage-plate" aria-hidden="true">
       <span class="stage-plate__v">SCAN 001 — SURFACE ONLY — 2026</span>
       <span class="stage-plate__n">Y-UP / ORIGIN AT OBJECT CENTRE</span>
@@ -75,7 +83,7 @@
         <dt>材质</dt><dd>金属 / 漆 / 线材</dd>
         <dt>采集</dt><dd>449 帧，2026.11</dd>
         <dt>尺寸</dt><dd>未记录</dd>
-        <dt>文件</dt><dd>99,999 面 / 3.6 MB</dd>
+        <dt>文件</dt><dd>99,999 面 / 1.0 MB</dd>
       </dl>
 
       <p class="scroll-cue" aria-hidden="true"><span></span>向下 / SCROLL</p>
@@ -152,7 +160,7 @@
       <div class="file__head" data-reveal>
         <p class="kicker">04 / 文件</p>
         <h2>拿走它，<br />或者继续转。</h2>
-        <p class="file__intro">页面里的模型是压缩过的 GLB：50,019 个顶点，99,999 个三角面，一张 2,048 像素的 JPEG 贴图。原始 FBX 和转换脚本放在 GitHub。</p>
+        <p class="file__intro">页面里的模型是压缩过的 GLB：50,019 个顶点，99,999 个三角面，一张 2,048 像素的 JPEG 贴图。网页版 1.0 MB；原始 GLB 3.6 MB，可单独下载。</p>
       </div>
 
       <div class="file__body" data-reveal>
@@ -163,6 +171,7 @@
             <tr><th>采集</th><td>449 帧 / 2026.11</td></tr>
             <tr><th>网格</th><td>50,019 顶点 / 99,999 三角面</td></tr>
             <tr><th>贴图</th><td>原始 4,096² / 网页 2,048² JPEG</td></tr>
+            <tr><th>文件</th><td>网页 1.0 MB（meshopt）/ 原始 GLB 3.6 MB</td></tr>
             <tr><th>坐标</th><td>Y-up / 原点在对象中心</td></tr>
             <tr><th>许可</th><td>代码 MIT / 模型仅作展示</td></tr>
           </tbody>
