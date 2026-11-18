@@ -1,8 +1,9 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js'
 
-const MODEL_URL = `${import.meta.env.BASE_URL}models/study-01.glb`
+const MODEL_URL = `${import.meta.env.BASE_URL}models/study-01-web.glb`
 
 const LIGHT_RIGS = {
   day: {
@@ -240,6 +241,7 @@ export function createViewer(canvas) {
 
   async function load(onProgress) {
     const loader = new GLTFLoader()
+    loader.setMeshoptDecoder(MeshoptDecoder)
     const gltf = await loader.loadAsync(MODEL_URL, (ev) => {
       if (onProgress) onProgress(ev)
     })

@@ -12,3 +12,5 @@ assets/raw/
 assets/*.blend
 tools/
 .DS_Store
+.chrome-profile/
+.tmp/

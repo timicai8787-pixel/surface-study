@@ -1,4 +1,6 @@
-import { createViewer } from './viewer.js'
+if (new URLSearchParams(location.search).has('poster')) {
+  document.body.classList.add('poster-mode')
+}
 
 const $ = (sel, root = document) => root.querySelector(sel)
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)]
@@ -9,25 +11,33 @@ const bar = $('#load-bar')
 const pctEl = $('#load-pct')
 const noteEl = $('#load-note')
 const canvas = $('#viewer')
+const statusText = $('#model-status-text')
+const retryBtn = $('#model-retry')
 
 let viewer = null
 let progressShown = 0
+let revealed = false
 
 function setProgress(pct, note) {
   progressShown = Math.max(progressShown, pct)
   if (bar) bar.style.width = `${progressShown}%`
   if (pctEl) pctEl.textContent = String(Math.round(progressShown)).padStart(3, '0')
+  if (statusText) statusText.textContent = `3D / ${Math.round(progressShown)}%`
   if (note && noteEl) noteEl.textContent = note
 }
 
-function fail(message) {
-  loader.classList.remove('is-done')
-  const word = $('.loader__word')
-  if (word) word.textContent = '读取失败'
-  if (noteEl) {
-    noteEl.innerHTML = `${message} · <a href="./models/study-01.glb" style="border-bottom:1px solid">直接下载 GLB</a>`
-  }
-  setProgress(0, '')
+function revealPage() {
+  if (revealed) return
+  revealed = true
+  loader.classList.add('is-done')
+  document.body.classList.add('is-loaded')
+  setupReveals()
+}
+
+function showModelError(label = '3D 未载入') {
+  if (statusText) statusText.textContent = label
+  if (retryBtn) retryBtn.hidden = false
+  document.body.classList.remove('model-ready')
 }
 
 function formatBuild() {
@@ -49,23 +59,9 @@ function setBuildInfo() {
 }
 
 function setupReveals() {
-  document.body.classList.add('reveal-ready')
-  const items = $$('[data-reveal]')
-  if (!('IntersectionObserver' in window)) {
-    items.forEach((el) => el.classList.add('is-visible'))
-    return
-  }
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue
-        entry.target.classList.add('is-visible')
-        io.unobserve(entry.target)
-      }
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
-  )
-  items.forEach((el) => io.observe(el))
+  // Content is never hidden behind JavaScript. The page is readable first;
+  // the model and the small UI details arrive afterwards.
+  $$('[data-reveal]').forEach((el) => el.classList.add('is-visible'))
 }
 
 function setupNav() {
@@ -189,19 +185,27 @@ async function boot() {
   setupScroll()
   setupNav()
 
+  setTimeout(revealPage, 700)
+  initViewer()
+}
+
+async function initViewer() {
   if (!canvas) {
-    fail('没有找到画布')
+    showModelError('3D 不可用')
     return
   }
 
+  let createViewer
   try {
+    ({ createViewer } = await import('./viewer.js'))
     viewer = createViewer(canvas)
   } catch (err) {
     console.error(err)
-    fail('浏览器没有可用的 WebGL')
+    showModelError('3D 不可用')
     return
   }
 
+  retryBtn?.addEventListener('click', () => location.reload())
   setProgress(2, 'STUDY 01 / CONNECTING')
 
   try {
@@ -212,16 +216,13 @@ async function boot() {
     })
   } catch (err) {
     console.error(err)
-    fail('模型没有加载成功')
+    showModelError()
     return
   }
 
   setProgress(100, 'STUDY 01 / READY')
-  await new Promise((r) => setTimeout(r, 380))
-  loader.classList.add('is-done')
-  document.body.classList.add('is-loaded')
-  setupReveals()
-  // Run the scroll state once more now that the scene exists.
+  document.body.classList.add('model-ready')
+  revealPage()
   window.dispatchEvent(new Event('scroll'))
 }
 

@@ -26,10 +26,10 @@
 | 原始文件 | FBX 7.5，51.4 MB，单网格 |
 | 网格 | 50,019 顶点 / 99,999 三角面 |
 | 贴图 | 原始 4,096² TGA / 网页 2,048² JPEG |
-| 网页模型 | GLB，3.6 MB，Y-up |
+| 网页模型 | GLB，1.0 MB（meshopt），原始 3.6 MB |
 | 页面 | three.js r180 · Vite 7 · GitHub Pages |
 
-原始 FBX 和可下载的 GLB 在 [Releases](https://github.com/timicai8787-pixel/surface-study/releases)。
+原始 FBX、原始 GLB 和网页压缩版都在 [Releases](https://github.com/timicai8787-pixel/surface-study/releases)。
 
 ## 演示文件
 
