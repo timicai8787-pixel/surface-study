@@ -31,6 +31,13 @@
 
 原始 FBX 和可下载的 GLB 在 [Releases](https://github.com/timicai8787-pixel/surface-study/releases)。
 
+## 演示文件
+
+`surface-study-01.pptx` 是 6 页、16:9 的演示文件，第 1 页和第 6 页各放了一个真正的 PowerPoint 3D 模型，可以直接拖动旋转；不支持 3D 的版本会显示同一角度的透明渲染。另有一份不含 3D 对象的兼容版 `surface-study-01-plain.pptx`。
+
+- [surface-study-01.pptx](https://github.com/timicai8787-pixel/surface-study/releases/latest/download/surface-study-01.pptx)
+- [surface-study-01-plain.pptx](https://github.com/timicai8787-pixel/surface-study/releases/latest/download/surface-study-01-plain.pptx)
+
 ## 本地运行
 
 ```bash
